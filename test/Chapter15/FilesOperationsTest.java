@@ -3,15 +3,17 @@ package Chapter15;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class FilesOperationsTest {
+    private static String folder = "C:\\Users\\USER\\Desktop\\Chapter15\\test\\files\\";
 
     @Test
     void testCanReadFromFile() {
-        String fileLocation = "C:\\Users\\USER\\Desktop\\Chapter15\\test\\files\\data.txt";
+        String fileLocation = folder.concat("data.txt");
         String data = FilesOperations.readFrom(fileLocation);
         assertNotNull(data);
         assertFalse(data.isEmpty());
@@ -19,7 +21,7 @@ public class FilesOperationsTest {
 
     @Test
     void testCanWriteToFile() throws IOException {
-        String fileLocation = "C:\\Users\\USER\\Desktop\\Chapter15\\test\\files\\Output.java";
+        String fileLocation = folder.concat("Output.java");
         String data = """
                 package files;
                 
@@ -35,4 +37,14 @@ public class FilesOperationsTest {
         assertNotNull(fileData);
         assertFalse(fileData.isEmpty());
    }
+
+   @Test
+    void testCanReadFromTheWeb() throws MalformedURLException {
+        String url = "https://jsonplaceholder.typicode.com/posts";
+        String fileLocation = folder.concat("data.json");
+        FilesOperations.readFromWeb(url,fileLocation);
+        String data = FilesOperations.readFrom(fileLocation);
+        assertNotNull(data);
+        assertFalse(data.isEmpty());
+    }
 }
