@@ -21,15 +21,16 @@ public class FilesOperationsTest {
     void testCanWriteToFile() throws IOException {
         String fileLocation = "C:\\Users\\USER\\Desktop\\Chapter15\\test\\files\\Output.java";
         String data = """
-                package file;
+                package files;
                 
+                import java.util.Arrays;
                 public class Output {
                 public static void main(String[] args) {
                 System.out.println(Arrays.toString(args));
                     }
                 }
                 """;
-        FilesOperations.writeDataTo(data,fileLocation);
+        FilesOperations.writeDataTo2(data,fileLocation);
         String fileData = FilesOperations.readFrom(fileLocation);
         assertNotNull(fileData);
         assertFalse(fileData.isEmpty());

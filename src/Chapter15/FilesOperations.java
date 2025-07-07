@@ -1,9 +1,10 @@
 package Chapter15;
 
-import Chapter15.exception.InvalidPathException;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,8 +36,14 @@ public class FilesOperations {
         try(BufferedWriter writer = Files.newBufferedWriter(path)){
             writer.write(data);
         }catch(IOException ex){
-            throw new RuntimeException();
+            throw new RuntimeException(ex);
         }
 
+    }
+
+    public static void writeDataTo2(String data, String fileLocation) throws IOException {
+        try(FileOutputStream outputStream = new FileOutputStream(fileLocation)){
+            outputStream.write(data.getBytes());
+        }
     }
 }
